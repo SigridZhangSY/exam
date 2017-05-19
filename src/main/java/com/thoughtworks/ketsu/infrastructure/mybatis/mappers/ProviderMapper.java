@@ -14,4 +14,6 @@ public interface ProviderMapper {
     List<Provider> findAll();
 
     int update(@Param("info") Map<String, Object> info, @Param("id") long id);
+
+    int delete(@Param("id") long id);
 }

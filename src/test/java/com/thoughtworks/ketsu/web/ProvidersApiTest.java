@@ -70,4 +70,12 @@ public class ProvidersApiTest extends ApiSupport{
         final Map<String, Object> map = get.readEntity(Map.class);
         assertThat(String.valueOf(map.get("name")), is("newName"));
     }
+
+    @Test
+    public void should_delete_provider_and_return_204() throws Exception {
+        final Provider provider = providerRepository.createProvider(TestHelper.providerJsonForTest("provider"));
+        final Response delete = delete("/providers/" + provider.getId());
+
+        assertThat(delete.getStatus(), is(204));
+    }
 }

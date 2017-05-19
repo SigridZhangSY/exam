@@ -3,9 +3,7 @@ package com.thoughtworks.ketsu.web;
 import com.thoughtworks.ketsu.infrastructure.core.Provider;
 import com.thoughtworks.ketsu.infrastructure.core.ProviderRepository;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,9 +23,16 @@ public class ProviderApi {
     }
 
     @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response updateProvider(@Context ProviderRepository providerRepository,
                                    Map<String, Object> info){
         providerRepository.update(info, provider.getId());
+        return Response.status(Response.Status.NO_CONTENT).build();
+    }
+
+    @DELETE
+    public Response deleteProvider(@Context ProviderRepository providerRepository){
+        providerRepository.delete(provider.getId());
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 

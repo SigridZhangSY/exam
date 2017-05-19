@@ -66,4 +66,13 @@ public class MyBatisProviderRepositoryTest {
         assertThat(provider.getName(), is(newName));
         assertThat(provider.getId(), is(newId));
     }
+
+    @Test
+    public void should_delete_provider() throws Exception {
+        Provider provider = providerRepository.createProvider(TestHelper.providerJsonForTest("provider"));
+        providerRepository.delete(provider.getId());
+
+        Optional<Provider> res = providerRepository.findById(provider.getId());
+        assertThat(res.isPresent(), is(false));
+    }
 }

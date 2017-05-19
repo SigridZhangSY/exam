@@ -34,4 +34,9 @@ public class MyBatisProviderRepository implements ProviderRepository {
     public int update(Map<String, Object> info, long id) {
         return providerMapper.update(info, id);
     }
+
+    @Override
+    public int delete(long id) {
+        return providerMapper.delete(id);
+    }
 }

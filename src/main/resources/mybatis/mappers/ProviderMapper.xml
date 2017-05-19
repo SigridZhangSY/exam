@@ -23,4 +23,7 @@
         UPDATE PROVIDERS P SET P.id=#{info.id}, P.name=#{info.name} WHERE P.id=#{id}
     </update>
 
+    <delete id="delete">
+        DELETE FROM PROVIDERS WHERE id = #{id}
+    </delete>
 </mapper>
