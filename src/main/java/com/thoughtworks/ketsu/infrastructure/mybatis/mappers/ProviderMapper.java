@@ -9,7 +9,9 @@ import java.util.Map;
 public interface ProviderMapper {
     void save(@Param("info") Map<String, Object> info);
 
-    Provider findById(long id);
+    Provider findById(@Param("id") long id);
 
     List<Provider> findAll();
+
+    int update(@Param("info") Map<String, Object> info, @Param("id") long id);
 }

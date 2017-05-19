@@ -29,4 +29,9 @@ public class MyBatisProviderRepository implements ProviderRepository {
     public Optional<Provider> findById(long id) {
         return Optional.ofNullable(providerMapper.findById(id));
     }
+
+    @Override
+    public int update(Map<String, Object> info, long id) {
+        return providerMapper.update(info, id);
+    }
 }

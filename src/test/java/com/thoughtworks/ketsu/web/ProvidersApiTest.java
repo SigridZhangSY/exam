@@ -60,8 +60,14 @@ public class ProvidersApiTest extends ApiSupport{
     @Test
     public void should_return_204_when_update_provider() throws Exception {
         final Provider provider = providerRepository.createProvider(TestHelper.providerJsonForTest("provider"));
-        final Response put = put("/providers/" + provider.getId(), new HashMap<>());
+        final Response put = put("/providers/" + provider.getId(), new HashMap<String, Object>(){{
+            put("name", "newName");
+            put("id", provider.getId()+1);
+        }});
 
         assertThat(put.getStatus(), is(204));
+        final Response get = get("/providers/" + (provider.getId()+1));
+        final Map<String, Object> map = get.readEntity(Map.class);
+        assertThat(String.valueOf(map.get("name")), is("newName"));
     }
 }

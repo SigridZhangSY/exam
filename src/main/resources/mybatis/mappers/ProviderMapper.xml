@@ -19,4 +19,8 @@
         FROM PROVIDERS P
     </select>
 
+    <update id="update">
+        UPDATE PROVIDERS P SET P.id=#{info.id}, P.name=#{info.name} WHERE P.id=#{id}
+    </update>
+
 </mapper>

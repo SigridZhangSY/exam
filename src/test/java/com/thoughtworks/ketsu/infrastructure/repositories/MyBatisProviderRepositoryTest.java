@@ -8,7 +8,9 @@ import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -47,5 +49,21 @@ public class MyBatisProviderRepositoryTest {
 
         Optional<Provider> res = providerRepository.findById(provider.getId());
         assertThat(res.isPresent(), is(true));
+    }
+
+    @Test
+    public void should_update_provider() throws Exception {
+        Provider provider = providerRepository.createProvider(TestHelper.providerJsonForTest("provider"));
+        String newName = "newName";
+        long newId = provider.getId() + 1;
+        Map info = new HashMap<String, Object>(){{
+            put("name", newName);
+            put("id", newId);
+        }};
+        providerRepository.update(info, provider.getId());
+        provider = providerRepository.findById(newId).get();
+
+        assertThat(provider.getName(), is(newName));
+        assertThat(provider.getId(), is(newId));
     }
 }
