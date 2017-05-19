@@ -25,4 +25,11 @@ public class ProvidersApiTest extends ApiSupport{
         assertThat(post.getStatus(), is(201));
         assertThat(Pattern.matches(".*?/providers/[0-9-]*", post.getLocation().toASCIIString()), is(true));
     }
+
+    @Test
+    public void should_return_200_when_get_all_providers() throws Exception {
+        final Response get = get("/providers");
+
+        assertThat(get.getStatus(), is(200));
+    }
 }
