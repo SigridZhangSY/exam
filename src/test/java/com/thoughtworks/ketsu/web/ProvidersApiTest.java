@@ -44,4 +44,11 @@ public class ProvidersApiTest extends ApiSupport{
         assertThat(map.get("totalCount"), is(1));
         assertThat(((List)map.get("providers")).size(), is(1));
     }
+
+    @Test
+    public void should_return_200_when_get_provider_by_id() throws Exception {
+        final Response get = get("/providers/1");
+
+        assertThat(get.getStatus(), is(200));
+    }
 }

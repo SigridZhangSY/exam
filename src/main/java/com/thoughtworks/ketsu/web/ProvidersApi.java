@@ -22,7 +22,7 @@ public class ProvidersApi {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createProvider(Map<String, Object> info,
                                    @Context Routes routes,
-                                   @Context ProviderRepository providerRepository){
+                                   @Context ProviderRepository providerRepository) {
 
         return Response.created(routes.providerUrl(providerRepository.createProvider(info))).build();
     }
@@ -30,13 +30,21 @@ public class ProvidersApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Map<String, Object> getAllProviders(@Context Routes routes,
-                                               @Context ProviderRepository providerRepository){
+                                               @Context ProviderRepository providerRepository) {
         List<Provider> providers = providerRepository.findAll();
 
-        return new HashMap<String, Object>(){{
+        return new HashMap<String, Object>() {{
             put("totalCount", providers.size());
-            put("providers", providers.stream().map(provider -> ((ProviderRecord)provider).toJson(routes)).collect(toList()));
+            put("providers", providers.stream().map(provider -> ((ProviderRecord) provider).toJson(routes)).collect
+                    (toList()));
         }};
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProviderById() {
+        return Response.status(Response.Status.OK).build();
     }
 
 }
