@@ -2,6 +2,7 @@ package com.thoughtworks.ketsu.web;
 
 import com.thoughtworks.ketsu.support.ApiSupport;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
+import com.thoughtworks.ketsu.support.TestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -17,9 +18,9 @@ import static org.hamcrest.Matchers.is;
 @RunWith(ApiTestRunner.class)
 public class ProvidersApiTest extends ApiSupport{
     @Test
-    public void should_return_201_when_create_provider() throws Exception {
-        Map <String, Object> map = new HashMap<>();
-        final Response post = post("/providers", map);
+    public void should_return_201_and_uri_when_create_provider_with_specified_parameters() throws Exception {
+        final String name = "provider";
+        final Response post = post("/providers", TestHelper.providerJsonForTest(name));
 
         assertThat(post.getStatus(), is(201));
         assertThat(Pattern.matches(".*?/providers/[0-9-]*", post.getLocation().toASCIIString()), is(true));
