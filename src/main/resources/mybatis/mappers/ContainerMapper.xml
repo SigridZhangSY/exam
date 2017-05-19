@@ -12,4 +12,10 @@
         FROM CONTAINERS C
         WHERE C.id = #{id}
     </select>
+
+    <select id="findAll" resultMap="records.container">
+        SELECT
+        <include refid="columns.container"/>
+        FROM CONTAINERS C
+    </select>
 </mapper>
