@@ -39,11 +39,9 @@ public class ContainersApi {
         }};
     }
 
-    @GET
     @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Container getById(@PathParam("id") long id,
+    public ContainerApi getById(@PathParam("id") long id,
                              @Context ContainerRepository containerRepository){
-        return containerRepository.findById(id).orElseThrow(() -> new NotFoundException("container not found"));
+        return new ContainerApi(containerRepository.findById(id).orElseThrow(() -> new NotFoundException("container not found")));
     }
 }

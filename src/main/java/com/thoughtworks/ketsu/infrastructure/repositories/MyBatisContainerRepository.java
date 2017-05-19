@@ -27,4 +27,9 @@ public class MyBatisContainerRepository implements ContainerRepository {
     public Optional<Container> findById(long id) {
         return Optional.ofNullable(containerMapper.findById(id));
     }
+
+    @Override
+    public int update(Map<String, Object> info, long id) {
+        return containerMapper.update(info, id);
+    }
 }

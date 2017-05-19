@@ -18,4 +18,8 @@
         <include refid="columns.container"/>
         FROM CONTAINERS C
     </select>
+
+    <update id="update">
+        UPDATE CONTAINERS C SET C.id=#{info.id} WHERE C.id=#{id}
+    </update>
 </mapper>

@@ -55,4 +55,12 @@ public class ContainersApiTest extends ApiSupport {
         Map map = get.readEntity(Map.class);
         assertThat(map.get("id"), notNullValue());
     }
+
+    @Test
+    public void should_return_204_and_update_container() throws Exception {
+        Container container = containerRepository.save(TestHelper.containerJsonForTest(4));
+
+        Response put = put("/containers/" + container.getId(), TestHelper.containerJsonForTest(5));
+        assertThat(put.getStatus(), is(204));
+    }
 }

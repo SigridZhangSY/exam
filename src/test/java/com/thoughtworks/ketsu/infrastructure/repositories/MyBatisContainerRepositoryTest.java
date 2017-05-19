@@ -35,4 +35,15 @@ public class MyBatisContainerRepositoryTest {
 
         assertThat(res.isPresent(), is(true));
     }
+
+    @Test
+    public void should_update_container() throws Exception {
+        Container container = containerRepository.save(TestHelper.containerJsonForTest(103));
+        long newId = 104;
+
+        containerRepository.update(TestHelper.containerJsonForTest(newId), container.getId());
+
+        Optional<Container> res = containerRepository.findById(newId);
+        assertThat(res.isPresent(), is(true));
+    }
 }

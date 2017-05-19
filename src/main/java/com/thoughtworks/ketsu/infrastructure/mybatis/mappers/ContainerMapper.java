@@ -12,4 +12,6 @@ public interface ContainerMapper {
     Container findById(@Param("id") long id);
 
     List<Container> findAll();
+
+    int update(@Param("info") Map<String, Object> info, @Param("id") long id);
 }
