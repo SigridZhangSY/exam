@@ -7,6 +7,7 @@ import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.ContainerMapper;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class MyBatisContainerRepository implements ContainerRepository {
    @Inject
@@ -20,5 +21,10 @@ public class MyBatisContainerRepository implements ContainerRepository {
     @Override
     public List<Container> findAll() {
         return containerMapper.findAll();
+    }
+
+    @Override
+    public Optional<Container> findById(long id) {
+        return Optional.ofNullable(containerMapper.findById(id));
     }
 }

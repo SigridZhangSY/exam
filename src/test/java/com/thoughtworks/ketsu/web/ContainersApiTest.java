@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -43,5 +44,15 @@ public class ContainersApiTest extends ApiSupport {
         assertThat(map.get("totalCount"), is(1));
         assertThat(((List)map.get("containers")).size(), is(1));
         assertThat(((Map)((List)map.get("containers")).get(0)).get("id"), is(2));
+    }
+
+    @Test
+    public void should_get_200_and_detail_when_get_container_by_id() throws Exception {
+        Container container = containerRepository.save(TestHelper.containerJsonForTest(3));
+
+        Response get = get("/containers/" + container.getId());
+        assertThat(get.getStatus(), is(200));
+        Map map = get.readEntity(Map.class);
+        assertThat(map.get("id"), notNullValue());
     }
 }

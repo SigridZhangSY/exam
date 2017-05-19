@@ -38,4 +38,12 @@ public class ContainersApi {
                     (toList()));
         }};
     }
+
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Container getById(@PathParam("id") long id,
+                             @Context ContainerRepository containerRepository){
+        return containerRepository.findById(id).orElseThrow(() -> new NotFoundException("container not found"));
+    }
 }
