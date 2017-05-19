@@ -40,11 +40,11 @@ public class ProvidersApi {
         }};
     }
 
-    @GET
     @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getProviderById() {
-        return Response.status(Response.Status.OK).build();
+    public ProviderApi getProviderById(@PathParam("id") long providerId,
+                                       @Context ProviderRepository providerRepository) {
+        Provider provider = providerRepository.findById(providerId).orElseThrow(() -> new NotFoundException("Provider not found"));
+        return new ProviderApi(provider);
     }
 
 }

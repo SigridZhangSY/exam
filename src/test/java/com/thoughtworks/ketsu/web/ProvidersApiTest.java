@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import static java.lang.Math.toIntExact;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -46,9 +47,13 @@ public class ProvidersApiTest extends ApiSupport{
     }
 
     @Test
-    public void should_return_200_when_get_provider_by_id() throws Exception {
-        final Response get = get("/providers/1");
+    public void should_return_detail_when_get_provider_by_id() throws Exception {
+        final Provider provider = providerRepository.createProvider(TestHelper.providerJsonForTest("provider"));
+        final Response get = get("/providers/" + provider.getId());
 
         assertThat(get.getStatus(), is(200));
+        final Map<String, Object> map = get.readEntity(Map.class);
+        assertThat(map.get("name"), is(provider.getName()));
+        assertThat(map.get("id"), is(toIntExact(provider.getId())));
     }
 }
