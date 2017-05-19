@@ -1,6 +1,7 @@
 package com.thoughtworks.ketsu.web;
 
 import com.thoughtworks.ketsu.infrastructure.core.ContainerRepository;
+import com.thoughtworks.ketsu.web.jersey.Routes;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -16,7 +17,8 @@ public class ContainersApi {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(Map<String, Object>info,
-                           @Context ContainerRepository containerRepository){
-        return Response.status(201).build();
+                           @Context ContainerRepository containerRepository,
+                           @Context Routes routes){
+        return Response.created(routes.containerUrl(containerRepository.save(info))).build();
     }
 }
