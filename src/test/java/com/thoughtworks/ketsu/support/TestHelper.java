@@ -6,10 +6,12 @@ import com.thoughtworks.ketsu.domain.user.UserRepository;
 import com.thoughtworks.ketsu.domain.user.UserRole;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TestHelper {
     private static int auto_increment_key = 1;
+
     public static Map<String, Object> deployment(String appName, String releaseId) {
         return new HashMap<String, Object>() {{
             put("app", String.format("http://service-api.tw.com/apps/%s", appName));
@@ -51,15 +53,23 @@ public class TestHelper {
         }};
     }
 
-    public static Map<String, Object> providerJsonForTest(String name){
-        return new HashMap<String, Object>(){{
+    public static Map<String, Object> providerJsonForTest(String name) {
+        return new HashMap<String, Object>() {{
             put("name", name);
         }};
     }
 
-    public static Map<String, Object> containerJsonForTest(long id){
-        return new HashMap<String, Object>(){{
+    public static Map<String, Object> containerJsonForTest(long id) {
+        return new HashMap<String, Object>() {{
             put("id", id);
+        }};
+    }
+
+    public static Map<String, Object> jobJsonForTest(long provider_id, List<Integer> containers) {
+        return new HashMap<String, Object>() {{
+            put("provider_id", provider_id);
+            put("containers", containers);
+
         }};
     }
 }

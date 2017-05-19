@@ -38,5 +38,6 @@
         <mapper resource="mybatis/mappers/UserMapper.xml"/>
         <mapper resource="mybatis/mappers/ProviderMapper.xml"/>
         <mapper resource="mybatis/mappers/ContainerMapper.xml"/>
+        <mapper resource="mybatis/mappers/JobMapper.xml"/>
     </mappers>
 </configuration>

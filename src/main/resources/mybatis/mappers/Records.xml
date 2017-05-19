@@ -25,4 +25,9 @@
     <resultMap id="container" type="com.thoughtworks.ketsu.infrastructure.records.ContainerRecord">
         <result property="id" column="containerId"/>
     </resultMap>
+
+    <resultMap id="job" type="com.thoughtworks.ketsu.infrastructure.records.JobRecord">
+        <result property="id" column="jobId"/>
+        <result property="provider_id" column="providerId"/>
+    </resultMap>
 </mapper>

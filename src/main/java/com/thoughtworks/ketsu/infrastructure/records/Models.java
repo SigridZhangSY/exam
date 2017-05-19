@@ -4,8 +4,10 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
 import com.thoughtworks.ketsu.domain.user.UserRepository;
 import com.thoughtworks.ketsu.infrastructure.core.ContainerRepository;
+import com.thoughtworks.ketsu.infrastructure.core.JobRepository;
 import com.thoughtworks.ketsu.infrastructure.core.ProviderRepository;
 import com.thoughtworks.ketsu.infrastructure.repositories.MyBatisContainerRepository;
+import com.thoughtworks.ketsu.infrastructure.repositories.MyBatisJobRepository;
 import com.thoughtworks.ketsu.infrastructure.repositories.MyBatisProviderRepository;
 import com.thoughtworks.ketsu.infrastructure.repositories.MyBatisUserRepository;
 import org.apache.ibatis.plugin.Interceptor;
@@ -58,6 +60,7 @@ public class Models extends AbstractModule {
         bind(UserRepository.class).to(MyBatisUserRepository.class);
         bind(ProviderRepository.class).to(MyBatisProviderRepository.class);
         bind(ContainerRepository.class).to(MyBatisContainerRepository.class);
+        bind(JobRepository.class).to(MyBatisJobRepository.class);
     }
 
     private void bindPersistence() {
