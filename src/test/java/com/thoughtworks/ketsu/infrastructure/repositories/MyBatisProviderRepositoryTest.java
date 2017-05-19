@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -24,5 +26,15 @@ public class MyBatisProviderRepositoryTest {
 
         assertThat(res.getName(), is(providerName));
         assertThat(res.getId(), notNullValue());
+    }
+
+    @Test
+    public void should_find_all_providers() throws Exception {
+        String providerName = "testProvider";
+        Provider provider = providerRepository.createProvider(TestHelper.providerJsonForTest(providerName));
+        List<Provider> res = providerRepository.findAll();
+
+        assertThat(res.size(), is(1));
+        assertThat(res.get(0).getName(), is(providerName));
     }
 }

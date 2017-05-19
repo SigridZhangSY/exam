@@ -13,4 +13,10 @@
         WHERE P.id = #{id}
     </select>
 
+    <select id="findAll" resultMap="records.provider">
+        SELECT
+        <include refid="columns.provider"/>
+        FROM PROVIDERS P
+    </select>
+
 </mapper>

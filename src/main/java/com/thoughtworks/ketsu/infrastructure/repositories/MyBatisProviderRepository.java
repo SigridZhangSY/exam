@@ -5,6 +5,7 @@ import com.thoughtworks.ketsu.infrastructure.core.ProviderRepository;
 import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.ProviderMapper;
 
 import javax.inject.Inject;
+import java.util.List;
 import java.util.Map;
 
 public class MyBatisProviderRepository implements ProviderRepository {
@@ -16,5 +17,10 @@ public class MyBatisProviderRepository implements ProviderRepository {
         providerMapper.save(info);
 
         return providerMapper.findById(Long.valueOf(String.valueOf(info.get("id"))));
+    }
+
+    @Override
+    public List<Provider> findAll() {
+        return providerMapper.findAll();
     }
 }
