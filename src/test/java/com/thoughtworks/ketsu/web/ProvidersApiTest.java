@@ -56,4 +56,12 @@ public class ProvidersApiTest extends ApiSupport{
         assertThat(map.get("name"), is(provider.getName()));
         assertThat(map.get("id"), is(toIntExact(provider.getId())));
     }
+
+    @Test
+    public void should_return_204_when_update_provider() throws Exception {
+        final Provider provider = providerRepository.createProvider(TestHelper.providerJsonForTest("provider"));
+        final Response put = put("/providers/" + provider.getId(), new HashMap<>());
+
+        assertThat(put.getStatus(), is(204));
+    }
 }
