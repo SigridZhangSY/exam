@@ -10,4 +10,9 @@
         U.password as userPassword,
         U.role as userRole
     </sql>
+
+    <sql id="provider">
+        P.id as providerId,
+        P.name as providerName
+    </sql>
 </mapper>

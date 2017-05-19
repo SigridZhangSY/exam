@@ -6,6 +6,9 @@ public class ProviderRecord implements Provider {
     private long id;
     private String name;
 
+    public ProviderRecord (){
+
+    }
     public ProviderRecord (long id){
         this.id = id;
     }

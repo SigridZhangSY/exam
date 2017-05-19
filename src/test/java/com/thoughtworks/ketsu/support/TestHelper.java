@@ -50,4 +50,10 @@ public class TestHelper {
             put("role", user.getRole());
         }};
     }
+
+    public static Map<String, Object> providerJsonForTest(String name){
+        return new HashMap<String, Object>(){{
+            put("name", name);
+        }};
+    }
 }
