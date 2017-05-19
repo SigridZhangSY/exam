@@ -1,17 +1,14 @@
 package com.thoughtworks.ketsu.infrastructure.records;
 
 import com.thoughtworks.ketsu.infrastructure.core.Provider;
+import com.thoughtworks.ketsu.web.jersey.Routes;
 
-public class ProviderRecord implements Provider {
+import java.util.HashMap;
+import java.util.Map;
+
+public class ProviderRecord implements Provider, Record {
     private long id;
     private String name;
-
-    public ProviderRecord (){
-
-    }
-    public ProviderRecord (long id){
-        this.id = id;
-    }
 
     @Override
     public long getId() {
@@ -21,5 +18,18 @@ public class ProviderRecord implements Provider {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Map<String, Object> toRefJson(Routes routes) {
+        return toJson(routes);
+    }
+
+    @Override
+    public Map<String, Object> toJson(Routes routes) {
+        return new HashMap<String, Object>(){{
+            put("name", name);
+            put("id", id);
+        }};
     }
 }

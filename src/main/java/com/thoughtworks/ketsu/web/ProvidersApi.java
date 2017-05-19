@@ -9,8 +9,11 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 @Path("providers")
 public class ProvidersApi {
@@ -26,8 +29,14 @@ public class ProvidersApi {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllProviders(){
-        return Response.status(Response.Status.OK).build();
+    public Map<String, Object> getAllProviders(@Context Routes routes,
+                                               @Context ProviderRepository providerRepository){
+        List<Provider> providers = providerRepository.findAll();
+
+        return new HashMap<String, Object>(){{
+            put("totalCount", providers.size());
+            put("providers", providers.stream().map(provider -> ((ProviderRecord)provider).toJson(routes)).collect(toList()));
+        }};
     }
 
 }
