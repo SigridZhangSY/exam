@@ -12,4 +12,6 @@ public interface ContainerRepository {
     Optional<Container> findById(long id);
 
     int update(Map<String, Object>info, long id);
+
+    int delete(long id);
 }

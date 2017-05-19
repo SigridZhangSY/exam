@@ -32,4 +32,9 @@ public class MyBatisContainerRepository implements ContainerRepository {
     public int update(Map<String, Object> info, long id) {
         return containerMapper.update(info, id);
     }
+
+    @Override
+    public int delete(long id) {
+        return containerMapper.delete(id);
+    }
 }

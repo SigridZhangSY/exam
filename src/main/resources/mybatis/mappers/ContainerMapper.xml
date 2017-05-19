@@ -22,4 +22,8 @@
     <update id="update">
         UPDATE CONTAINERS C SET C.id=#{info.id} WHERE C.id=#{id}
     </update>
+
+    <delete id="delete">
+        DELETE FROM CONTAINERS WHERE id = #{id}
+    </delete>
 </mapper>

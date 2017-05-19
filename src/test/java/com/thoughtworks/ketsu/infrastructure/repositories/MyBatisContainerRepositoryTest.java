@@ -46,4 +46,14 @@ public class MyBatisContainerRepositoryTest {
         Optional<Container> res = containerRepository.findById(newId);
         assertThat(res.isPresent(), is(true));
     }
+
+    @Test
+    public void should_delete_container() throws Exception {
+        Container container = containerRepository.save(TestHelper.containerJsonForTest(104));
+
+        containerRepository.delete(104);
+
+        Optional<Container> res = containerRepository.findById(104);
+        assertThat(res.isPresent(), is(false));
+    }
 }

@@ -63,4 +63,13 @@ public class ContainersApiTest extends ApiSupport {
         Response put = put("/containers/" + container.getId(), TestHelper.containerJsonForTest(5));
         assertThat(put.getStatus(), is(204));
     }
+
+    @Test
+    public void should_204_when_delete_container() throws Exception {
+        Container container = containerRepository.save(TestHelper.containerJsonForTest(5));
+
+        Response delete = delete("/containers/" + container.getId());
+        assertThat(delete.getStatus(), is(204));
+
+    }
 }
