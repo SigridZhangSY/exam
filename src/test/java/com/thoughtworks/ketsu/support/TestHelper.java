@@ -56,4 +56,10 @@ public class TestHelper {
             put("name", name);
         }};
     }
+
+    public static Map<String, Object> containerJsonForTest(long id){
+        return new HashMap<String, Object>(){{
+            put("id", id);
+        }};
+    }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thoughtworks.ketsu.infrastructure.mybatis.mappers.ContainerMapper">
+    <insert id="save">
+        INSERT INTO CONTAINERS (id)
+        VALUES (#{info.id})
+    </insert>
+
+    <select id="findById" resultMap="records.container">
+        SELECT
+        <include refid="columns.container"/>
+        FROM CONTAINERS C
+        WHERE C.id = #{id}
+    </select>
+</mapper>

@@ -12,3 +12,7 @@ CREATE TABLE providers (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE containers (
+  id INT PRIMARY KEY
+);

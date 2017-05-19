@@ -15,4 +15,8 @@
         P.id as providerId,
         P.name as providerName
     </sql>
+
+    <sql id="container">
+        C.id as containerId
+    </sql>
 </mapper>

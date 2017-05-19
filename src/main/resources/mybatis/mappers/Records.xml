@@ -21,4 +21,8 @@
         <result property="id" column="providerId"/>
         <result property="name" column="providerName"/>
     </resultMap>
+
+    <resultMap id="container" type="com.thoughtworks.ketsu.infrastructure.records.ContainerRecord">
+        <result property="id" column="containerId"/>
+    </resultMap>
 </mapper>
