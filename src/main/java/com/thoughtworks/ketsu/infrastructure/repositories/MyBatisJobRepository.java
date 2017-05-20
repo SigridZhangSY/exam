@@ -8,6 +8,7 @@ import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.JobMapper;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class MyBatisJobRepository implements JobRepository {
     @Inject
@@ -27,5 +28,10 @@ public class MyBatisJobRepository implements JobRepository {
     @Override
     public List<Job> findAll() {
         return jobMapper.findAll();
+    }
+
+    @Override
+    public Optional<Job> findById(long jobId) {
+        return Optional.ofNullable(jobMapper.findById(jobId));
     }
 }

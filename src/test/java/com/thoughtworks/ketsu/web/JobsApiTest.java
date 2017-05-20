@@ -1,12 +1,10 @@
 package com.thoughtworks.ketsu.web;
 
-import com.thoughtworks.ketsu.infrastructure.core.ContainerRepository;
-import com.thoughtworks.ketsu.infrastructure.core.JobRepository;
-import com.thoughtworks.ketsu.infrastructure.core.Provider;
-import com.thoughtworks.ketsu.infrastructure.core.ProviderRepository;
+import com.thoughtworks.ketsu.infrastructure.core.*;
 import com.thoughtworks.ketsu.support.ApiSupport;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
 import com.thoughtworks.ketsu.support.TestHelper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -30,15 +28,24 @@ public class JobsApiTest extends ApiSupport {
     @Inject
     JobRepository jobRepository;
 
-    @Test
-    public void should_201_and_uri_when_post() throws Exception {
+    private Provider provider;
+
+    private List<Integer> containers;
+
+    @Override
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
         containerRepository.save(TestHelper.containerJsonForTest(301));
         containerRepository.save(TestHelper.containerJsonForTest(302));
-        Provider provider = providerRepository.createProvider(TestHelper.providerJsonForTest("PROVIDER"));
-        List<Integer> containers = new ArrayList<Integer>();
+        provider = providerRepository.createProvider(TestHelper.providerJsonForTest("PROVIDER"));
+        containers = new ArrayList<Integer>();
         containers.add(Integer.valueOf(301));
         containers.add(Integer.valueOf(302));
+    }
 
+    @Test
+    public void should_201_and_uri_when_post() throws Exception {
         Response post = post("/jobs", TestHelper.jobJsonForTest(provider.getId(), containers));
 
         assertThat(post.getStatus(), is(201));
@@ -47,18 +54,24 @@ public class JobsApiTest extends ApiSupport {
 
     @Test
     public void should_200_and_detail_when_get_all() throws Exception {
-        containerRepository.save(TestHelper.containerJsonForTest(303));
-        containerRepository.save(TestHelper.containerJsonForTest(304));
-        Provider provider = providerRepository.createProvider(TestHelper.providerJsonForTest("PROVIDER"));
-        List<Integer> containers = new ArrayList<Integer>();
-        containers.add(Integer.valueOf(303));
-        containers.add(Integer.valueOf(304));
         jobRepository.create(TestHelper.jobJsonForTest(provider.getId(), containers));
 
         final Response get = get("/jobs");
+        assertThat(get.getStatus(), is(200));
         Map res = get.readEntity(Map.class);
-        assertThat(res.get("totalCount"), notNullValue());
+        assertThat(res.get("totalCount"), is(1));
         assertThat(res.get("jobs"), notNullValue());
+    }
 
+    @Test
+    public void should_200_when_get_job_by_id() throws Exception {
+        Job job = jobRepository.create(TestHelper.jobJsonForTest(provider.getId(), containers));
+
+        final Response get = get("/jobs/" + job.getId());
+        assertThat(get.getStatus(), is(200));
+        Map res = get.readEntity(Map.class);
+        assertThat(res.get("provider_id"), notNullValue());
+        assertThat(res.get("id"), notNullValue());
+        assertThat(res.get("containers"), notNullValue());
     }
 }

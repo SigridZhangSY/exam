@@ -21,20 +21,27 @@ public class JobsApi {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(Map<String, Object>info,
+    public Response create(Map<String, Object> info,
                            @Context JobRepository jobRepository,
-                           @Context Routes routes){
+                           @Context Routes routes) {
         return Response.created(routes.jobUrl(jobRepository.create(info))).build();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Map<String, Object> getAll(@Context JobRepository jobRepository,
-                                      @Context Routes routes){
+                                      @Context Routes routes) {
         List<Job> jobs = jobRepository.findAll();
-        return new HashMap<String, Object>(){{
+        return new HashMap<String, Object>() {{
             put("totalCount", jobs.size());
-            put("jobs", jobs.stream().map(job -> ((JobRecord)job).toJson(routes)).collect(toList()));
+            put("jobs", jobs.stream().map(job -> ((JobRecord) job).toJson(routes)).collect(toList()));
         }};
+    }
+
+    @Path("{id}")
+    public JobApi getJobApi(@PathParam("id") long jobId,
+                            @Context JobRepository jobRepository) {
+        Job job = jobRepository.findById(jobId).orElseThrow(() -> new NotFoundException("JOB NOT FOUND"));
+        return new JobApi(job);
     }
 }
