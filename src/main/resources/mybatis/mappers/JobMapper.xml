@@ -25,4 +25,12 @@
         FROM JOBCONTAINER AS JC LEFT JOIN JOBS AS J
         ON JC.job_id = J.id
     </select>
+
+    <update id="update">
+        UPDATE JOBS J SET J.id=#{info.id}, J.provider_id=#{info.provider_id} WHERE J.id=#{id}
+    </update>
+
+    <delete id="deleteContainers">
+        DELETE FROM JOBCONTAINER WHERE job_id = #{job_id}
+    </delete>
 </mapper>

@@ -22,6 +22,16 @@ public class JobRecord implements Job, Record{
     }
 
     @Override
+    public long getProviderId() {
+        return provider_id;
+    }
+
+    @Override
+    public List<Container> getContainers() {
+        return containers;
+    }
+
+    @Override
     public Map<String, Object> toRefJson(Routes routes) {
         return null;
     }

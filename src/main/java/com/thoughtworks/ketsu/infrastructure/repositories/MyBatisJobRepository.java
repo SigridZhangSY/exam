@@ -34,4 +34,15 @@ public class MyBatisJobRepository implements JobRepository {
     public Optional<Job> findById(long jobId) {
         return Optional.ofNullable(jobMapper.findById(jobId));
     }
+
+    @Override
+    public void update(Map<String, Object> info, long id) {
+        info.put("id", id);
+        jobMapper.update(info, id);
+        jobMapper.deleteContainers(id);
+        List<Integer> containers = (List<Integer>) info.get("containers");
+        for(int i = 0; i < containers.size(); i++){
+            jobMapper.addContainer(Long.valueOf(String.valueOf(info.get("id"))), containers.get(i));
+        }
+    }
 }

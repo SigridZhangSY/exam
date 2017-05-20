@@ -10,4 +10,6 @@ public interface JobRepository {
     List<Job> findAll();
 
     Optional<Job> findById(long jobId);
+
+    void update(Map<String, Object> info, long id);
 }

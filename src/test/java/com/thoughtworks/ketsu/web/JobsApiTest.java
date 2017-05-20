@@ -74,4 +74,15 @@ public class JobsApiTest extends ApiSupport {
         assertThat(res.get("id"), notNullValue());
         assertThat(res.get("containers"), notNullValue());
     }
+
+    @Test
+    public void should_204_when_update_job() throws Exception {
+        Job job = jobRepository.create(TestHelper.jobJsonForTest(provider.getId(), containers));
+        Provider newProvider = providerRepository.createProvider(TestHelper.providerJsonForTest("NEWPROVIDER"));
+        containers = new ArrayList<Integer>();
+
+        final Response put = put("/jobs/" + job.getId(), TestHelper.jobJsonForTest(newProvider.getId(), containers));
+
+        assertThat(put.getStatus(), is(204));
+    }
 }

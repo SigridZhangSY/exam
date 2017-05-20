@@ -14,4 +14,8 @@ public interface JobMapper {
     int addContainer(@Param("job_id")long job_id, @Param("container_id")long container_id);
 
     List<Job> findAll();
+
+    int update(@Param("info")Map<String, Object> info, @Param("id")long id);
+
+    int deleteContainers(@Param("job_id")long jobId);
 }
