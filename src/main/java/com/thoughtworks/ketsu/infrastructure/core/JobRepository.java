@@ -12,4 +12,6 @@ public interface JobRepository {
     Optional<Job> findById(long jobId);
 
     void update(Map<String, Object> info, long id);
+
+    void delete(long id);
 }

@@ -85,4 +85,13 @@ public class JobsApiTest extends ApiSupport {
 
         assertThat(put.getStatus(), is(204));
     }
+
+    @Test
+    public void should_return_204_when_delete_job() throws Exception {
+        Job job = jobRepository.create(TestHelper.jobJsonForTest(provider.getId(), containers));
+
+        final Response delete = delete("/jobs/" + job.getId());
+
+        assertThat(delete.getStatus(), is(204));
+    }
 }

@@ -45,4 +45,10 @@ public class MyBatisJobRepository implements JobRepository {
             jobMapper.addContainer(Long.valueOf(String.valueOf(info.get("id"))), containers.get(i));
         }
     }
+
+    @Override
+    public void delete(long id) {
+        jobMapper.deleteContainers(id);
+        jobMapper.delete(id);
+    }
 }

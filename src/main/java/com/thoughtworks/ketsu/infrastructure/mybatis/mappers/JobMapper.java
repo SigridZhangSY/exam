@@ -18,4 +18,6 @@ public interface JobMapper {
     int update(@Param("info")Map<String, Object> info, @Param("id")long id);
 
     int deleteContainers(@Param("job_id")long jobId);
+
+    int delete(@Param("id")long id);
 }

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.core.Is.is;
@@ -61,5 +62,15 @@ public class MyBatisJobRepositoryTest {
         Job res = jobRepository.findById(job.getId()).get();
         assertThat(res.getProviderId(), is(newProvider.getId()));
         assertThat(res.getContainers().size(), is(1));
+    }
+
+    @Test
+    public void should_delete_job() throws Exception {
+        Job job = jobRepository.create(TestHelper.jobJsonForTest(provider.getId(), containers));
+
+        jobRepository.delete(job.getId());
+
+        Optional<Job> res = jobRepository.findById(job.getId());
+        assertThat(res.isPresent(), is(false));
     }
 }

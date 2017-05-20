@@ -33,4 +33,8 @@
     <delete id="deleteContainers">
         DELETE FROM JOBCONTAINER WHERE job_id = #{job_id}
     </delete>
+
+    <delete id="delete">
+        DELETE FROM JOBS WHERE id = #{id}
+    </delete>
 </mapper>
