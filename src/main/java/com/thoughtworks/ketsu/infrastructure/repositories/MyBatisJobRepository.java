@@ -1,5 +1,6 @@
 package com.thoughtworks.ketsu.infrastructure.repositories;
 
+import com.thoughtworks.ketsu.infrastructure.core.ContainerRepository;
 import com.thoughtworks.ketsu.infrastructure.core.Job;
 import com.thoughtworks.ketsu.infrastructure.core.JobRepository;
 import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.JobMapper;
@@ -21,5 +22,10 @@ public class MyBatisJobRepository implements JobRepository {
         }
 
         return jobMapper.findById(Long.valueOf(String.valueOf(info.get("id"))));
+    }
+
+    @Override
+    public List<Job> findAll() {
+        return jobMapper.findAll();
     }
 }

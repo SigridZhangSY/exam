@@ -29,5 +29,8 @@
     <resultMap id="job" type="com.thoughtworks.ketsu.infrastructure.records.JobRecord">
         <result property="id" column="jobId"/>
         <result property="provider_id" column="providerId"/>
+        <collection property="containers" ofType="com.thoughtworks.ketsu.infrastructure.records.ContainerRecord">
+            <result property="id" column="containerId"/>
+        </collection>
     </resultMap>
 </mapper>

@@ -22,6 +22,7 @@
 
     <sql id="job">
         J.id as jobId,
-        J.provider_id as providerId
+        J.provider_id as providerId,
+        JC.container_id as containerId
     </sql>
 </mapper>

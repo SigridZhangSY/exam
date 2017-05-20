@@ -9,7 +9,8 @@
     <select id="findById" resultMap="records.job">
         SELECT
         <include refid="columns.job"/>
-        FROM JOBS J
+        FROM JOBCONTAINER AS JC LEFT JOIN JOBS AS J
+        ON JC.job_id = J.id
         WHERE J.id = #{id}
     </select>
 
@@ -17,4 +18,11 @@
         INSERT INTO JOBCONTAINER (job_id, container_id)
         VALUES (#{job_id}, #{container_id})
     </insert>
+
+    <select id="findAll" resultMap="records.job">
+        SELECT
+        <include refid="columns.job"/>
+        FROM JOBCONTAINER AS JC LEFT JOIN JOBS AS J
+        ON JC.job_id = J.id
+    </select>
 </mapper>
